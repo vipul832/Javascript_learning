@@ -1,89 +1,46 @@
-// Conditionals
+//Functions
 
-// If else
+//Functions Statements  this also called as function Declaration
 
-let age = 20;
+function name() {}
 
-function agecheck() {
-  if (age > 18) {
-    alert("You Can Vote");
-  } else {
-    alert("You Cannot Vote. Try Next year");
-  }
+//Fucntion Expression
+
+var c = function () {
+  console.log("Function Expression");
+};
+c();
+
+// anonymous Function     //a function with out name and can pass as a value.
+
+// function ()
+// {
+
+// }
+
+//named function expression
+
+var a = function xyz() {
+  console.log("named function expression");
+};
+
+a();
+
+//First Class Function   // The abality to pass a function inside a function  and can return a function
+
+function test(re) {
+  re();
 }
 
-// for switch
-
-let animal = "Dog";
-
-switch (animal) {
-  case "Dog":
-    console.log("It is a Dog.");
-    break;
-  case "Cat":
-    console.log("It is a Cat.");
-    break;
-  default:
-    console.log("It is Another Animal");
+function resutl() {
+  console.log("Result");
 }
 
-//for
+test(resutl);
 
-for (let i = 0; i < 4; i++) {
-  console.log(i);
-}
+//Arrow Function
 
-console.log("ForIn Loop:");
+var sum = () => 10 + 15;
 
-//forin                     //use only when order is not important for that you can use for, forof  and Array.forEach()
-
-const arr = [13, 234, 5, 657, 0];
-let max = 0;
-
-for (let x in arr) {
-  if (arr[x] > max) {
-    max = arr[x];
-  }
-}
-
-console.log("Max number in loop:", max);
-
-console.log("forEach()");
-//forEach()
-
-const arr2 = [];
-arr.forEach(double);
-
-function double(x) {
-  x = x * 2;
-  arr2.push(x);
-}
-
-console.log("arr2", arr2);
-
-//forof
-
-console.log("ForOf");
-
-const carbrand = ["BMW", "Audi", "Honda"];
-
-for (let x of carbrand) {
-  console.log(x);
-}
-
-//while
-console.log("While loop:");
-let a = 5;
-
-while (a > 0) {
-  console.log(a);
-  a--;
-}
-
-console.log("Do while loop:");
-let test = 15;
-
-do {
-  console.log(test);
-  test--;
-} while (test > 10);
+var result = sum();
+console.log(result);
