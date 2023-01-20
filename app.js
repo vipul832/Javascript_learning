@@ -1,58 +1,89 @@
-/* 
-    
-    Variable and Type
+// Conditionals
 
-*/
+// If else
 
-//Variable Keyword
+let age = 20;
 
-var a; //Decalaration of variable
-a = 10; //initializing the variable
+function agecheck() {
+  if (age > 18) {
+    alert("You Can Vote");
+  } else {
+    alert("You Cannot Vote. Try Next year");
+  }
+}
 
-//another way to write
+// for switch
 
-var b = 10; //number
+let animal = "Dog";
 
-let c = 2; //number
+switch (animal) {
+  case "Dog":
+    console.log("It is a Dog.");
+    break;
+  case "Cat":
+    console.log("It is a Cat.");
+    break;
+  default:
+    console.log("It is Another Animal");
+}
 
-const Name = "Vipul"; // Cost variable cannot change value throughout the program
-console.log(typeof Name); // string
+//for
 
-let age = true; //boolean
+for (let i = 0; i < 4; i++) {
+  console.log(i);
+}
 
-var car;
-console.log(typeof car); // Undefined Which mean we have not initialized the variable but by default it undefined.
+console.log("ForIn Loop:");
 
-document.getElementById("details").innerHTML = "My name is: " + Name;
+//forin                     //use only when order is not important for that you can use for, forof  and Array.forEach()
 
-const carinfo = { type: "BMW", model: "2023", color: "Red" }; //Object
-console.log(typeof carinfo);
+const arr = [13, 234, 5, 657, 0];
+let max = 0;
 
-console.log(carinfo);
+for (let x in arr) {
+  if (arr[x] > max) {
+    max = arr[x];
+  }
+}
 
-console.log(carinfo.color); //Red
+console.log("Max number in loop:", max);
 
-document.getElementById("cartype").innerHTML = carinfo["type"];
-document.getElementById("carmodel").innerHTML = carinfo["model"];
-document.getElementById("carcol").innerHTML = carinfo["color"];
+console.log("forEach()");
+//forEach()
 
-let temp = 100; //redeclaration not allowed  and cannot use before it declaration
+const arr2 = [];
+arr.forEach(double);
 
-// let temp=0;              //Show Error
+function double(x) {
+  x = x * 2;
+  arr2.push(x);
+}
 
-console.log("temp2:", temp2);
+console.log("arr2", arr2);
 
-var temp2 = 10; //redeclaration is allowed  and you can use before it declaration
-var temp2 = 1;
+//forof
 
-//block scope
+console.log("ForOf");
 
-{
-  let x = 2;
+const carbrand = ["BMW", "Audi", "Honda"];
+
+for (let x of carbrand) {
   console.log(x);
 }
-// console.log(x); // here x is not decelared
 
-let arr = [1, 35, 33, 56];
+//while
+console.log("While loop:");
+let a = 5;
 
-console.log("arr", typeof arr);
+while (a > 0) {
+  console.log(a);
+  a--;
+}
+
+console.log("Do while loop:");
+let test = 15;
+
+do {
+  console.log(test);
+  test--;
+} while (test > 10);
