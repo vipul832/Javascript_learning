@@ -1,46 +1,12 @@
-//Functions
-
-//Functions Statements  this also called as function Declaration
-
-function name() {}
-
-//Fucntion Expression
-
-var c = function () {
-  console.log("Function Expression");
-};
-c();
-
-// anonymous Function     //a function with out name and can pass as a value.
-
-// function ()
-// {
-
-// }
-
-//named function expression
-
-var a = function xyz() {
-  console.log("named function expression");
-};
-
-a();
-
-//First Class Function   // The abality to pass a function inside a function  and can return a function
-
-function test(re) {
-  re();
+class car {
+  constructor(carName, carModel) {
+    this.name = carName;
+    this.model = carModel;
+  }
+  display() {
+    console.log(this.name + " " + this.model);
+  }
 }
 
-function resutl() {
-  console.log("Result");
-}
-
-test(resutl);
-
-//Arrow Function
-
-var sum = () => 10 + 15;
-
-var result = sum();
-console.log(result);
+let car1 = new car("BMW", 2019);
+car1.display();
