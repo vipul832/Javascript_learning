@@ -38,5 +38,29 @@ class sportcar extends car {
   }
 }
 
+
+test(resutl);
+
+//Arrow Function
+
+var sum = () => 10 + 15;
+
+var result = sum();
+console.log(result);
+
+//CallBack Function  are passed as an argument to another functions
+//callBack Function can run after another function has finished.
+
+function display2(total) {
+  console.log("result:", total);
+}
+
+function sum2(num1, num2, display2) {
+  let total = num1 + num2;
+  display2(total);
+}
+
+sum2(3, 32, display2); //passing a function as argument
+
 let sportcar1 = new sportcar("BMW", 215, "V8");
 sportcar1.show();
