@@ -1,3 +1,4 @@
+
 //Functions
 
 //Functions Statements  this also called as function Declaration
@@ -58,3 +59,16 @@ function sum2(num1, num2, display2) {
 }
 
 sum2(3, 32, display2); //passing a function as argument
+=======
+const pro = fetch("https://jsonplaceholder.typicode.com/users");
+
+console.log(pro); //It show promise
+
+//This show the promiseState and PromiseResults where our data is store
+data = pro
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  });
