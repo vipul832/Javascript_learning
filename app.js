@@ -1,32 +1,48 @@
-//Closure Function
+// Async
 
-function cloth() {
-  let clo = "Shirt";
+//before using async and await
 
-  //if you buy shirt you need pants right
-  function pant(pa) {
-    console.log(clo); //here it will take the latest value of variable in closure
-    return "With " + clo + " buy " + pa + " also.";
-  }
-
-  clo = "T-shirt";
-  return pant;
+function checkname(name) {
+  return new Promise((resolve, reject) => {
+    console.log("making Request");
+    if (name == "vipul") {
+      resolve("Access Allowed");
+    } else {
+      reject("Access Denied");
+    }
+  });
 }
 
-let clo1 = cloth();
+function processrequest(res) {
+  return new Promise((resolve, reject) => {
+    console.log("process Response");
+    resolve("Welcome to Page");
+  });
+}
 
-//now i can use pant() out side it parent function
+// checkname("vipul")
+//   .then((a) => {
+//     console.log("response received");
+//     return processrequest(a);
+//   })
+//   .then((pro) => {
+//     console.log(pro);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
-console.log(clo1("pant"));
-console.log(clo1);
-//Local Storage
+// using async and await
 
-localStorage.setItem("name", "Vipul"); //it will store in local storage
+async function login() {
+  try {
+    const checkuser = await checkname("vipul");
+    console.log("response received");
+    const loadpage = await processrequest(checkuser);
+    console.log(loadpage);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-//to get value from the local storage use "getItem"
-
-console.log(localStorage.getItem("name"));
-
-// //to remove item from local storage
-
-// localStorage.removeItem("name");
+login();
