@@ -1,48 +1,25 @@
-// Async
+//Debouncing
 
-//before using async and await
+const text = document.querySelector("input");
+const defaultText = document.getElementById("default");
+const debounceText = document.getElementById("debounce");
 
-function checkname(name) {
-  return new Promise((resolve, reject) => {
-    console.log("making Request");
-    if (name == "vipul") {
-      resolve("Access Allowed");
-    } else {
-      reject("Access Denied");
-    }
-  });
+const updatedebouncetext = debounce((text) => {
+  debounceText.textContent = text;
+}, 3000);
+
+text.addEventListener("input", (e) => {
+  defaultText.textContent = e.target.value; //this will send request every single time i do change in text
+  updatedebouncetext(e.target.value); // Here if i does not type gap of 3s it will send request and do update
+});
+
+function debounce(callbackf, delay) {
+  let timer;
+  return (...args) => {
+    //...args is a any array-like object accessible inside functions that contains the values of the arguments passed to that functions.
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      callbackf(...args);
+    }, delay);
+  };
 }
-
-function processrequest(res) {
-  return new Promise((resolve, reject) => {
-    console.log("process Response");
-    resolve("Welcome to Page");
-  });
-}
-
-// checkname("vipul")
-//   .then((a) => {
-//     console.log("response received");
-//     return processrequest(a);
-//   })
-//   .then((pro) => {
-//     console.log(pro);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-// using async and await
-
-async function login() {
-  try {
-    const checkuser = await checkname("vipul");
-    console.log("response received");
-    const loadpage = await processrequest(checkuser);
-    console.log(loadpage);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-login();
