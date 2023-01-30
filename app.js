@@ -1,32 +1,53 @@
-let car = {
-  name: "Audi",
-  model: "Q3",
-  speed() {
-    return "220 km\\h";
-  },
-  engine() {
-    return "working";
-  },
-};
+class Person {
+  name; //we use # in beginning to create private property
+  constructor(name) {
+    this.name = name;
+  }
+  Into() {
+    console.log(`Hi! my name is ${this.name}`);
+  }
+}
 
-let sportcar = {
-  name: "Audi",
-  model: "RS 7",
-  speed() {
-    return "250 km\\h";
-  },
-  exhaust() {
-    return "Loud Sound";
-  },
-};
+const p1 = new Person("Raj");
 
-// sportcar.__proto__ = car; //we are inherit the property from the car object. It not proper way to do.
+p1.Into();
 
-// console.log(sportcar.engine());
-// console.log(sportcar.speed());
+class Professor extends Person {
+  // here i am inherit properties of person class
+  teacher;
 
-//better  way to write is as below
+  constructor(name, teacher) {
+    super(name);
+    this.teacher = teacher;
+  }
 
-let sportcar1 = Object.create(car); //__proto__ point to base prototype {}
+  Into() {
+    console.log(
+      `Hi! my Name is ${this.name} and I will be your ${this.teacher} professor.`
+    );
+  }
 
-console.log(sportcar1.engine());
+  grade() {
+    console.log("I can give grade................");
+  }
+}
+
+const prof1 = new Professor("Martin", "Maths");
+prof1.Into();
+
+class student extends Person {
+  no_of_subject;
+  constructor(name, nos) {
+    super(name);
+    this.no_of_subject = nos;
+  }
+
+  Into() {
+    console.log(
+      `Hi! my name is ${this.name} and i will study ${this.no_of_subject} Subject in College.`
+    );
+  }
+}
+
+const s1 = new student("Ram", 5);
+s1.Into();
