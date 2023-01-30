@@ -1,57 +1,32 @@
-// array iteration methods
+let car = {
+  name: "Audi",
+  model: "Q3",
+  speed() {
+    return "220 km\\h";
+  },
+  engine() {
+    return "working";
+  },
+};
 
-//1 map()
-//2 filter()
-//3 reduce()         methods runs a function on each array elements to produce a single value.
+let sportcar = {
+  name: "Audi",
+  model: "RS 7",
+  speed() {
+    return "250 km\\h";
+  },
+  exhaust() {
+    return "Loud Sound";
+  },
+};
 
-const num1 = [1, 4, 43, 76, 23, 78];
+// sportcar.__proto__ = car; //we are inherit the property from the car object. It not proper way to do.
 
-//find double of each number
+// console.log(sportcar.engine());
+// console.log(sportcar.speed());
 
-const num2 = num1.map(double); //function take 3 arguments value,index and array
+//better  way to write is as below
 
-function double(value) {
-  return value * 2;
-}
+let sportcar1 = Object.create(car); //__proto__ point to base prototype {}
 
-console.log(num2);
-
-//find number less than 50 in array using filter()
-
-const num3 = num1.filter(findless);
-
-function findless(value, index, array) {
-  return value < 50;
-}
-
-console.log(num3);
-
-//find the sum of number of array
-
-const num4 = num1.reduce((acc, curr) => {
-  acc += curr;
-  return acc;
-}, 0);
-
-console.log("sum :", num4);
-
-const user = [
-  { firstname: "akshay", lastname: "saini", age: 26 },
-  { firstname: "donald", lastname: "trump", age: 75 },
-  { firstname: "elon", lastname: "musk", age: 50 },
-  { firstname: "deepika", lastname: "padukone", age: 26 },
-];
-
-const output = user.reduce(function (acc, curr) {
-  if (curr.age < 30) {
-    acc.push(curr.firstname);
-  }
-  return acc;
-}, []);
-console.log(output);
-
-const totalage = user.reduce((sumage, item) => {
-  return sumage + item.age;
-}, 0);
-
-console.log(totalage);
+console.log(sportcar1.engine());
