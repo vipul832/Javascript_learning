@@ -1,63 +1,70 @@
-//Functions
+//Json
 
-//Functions Statements  this also called as function Declaration
+//Json Formate is almost identical to javascript object
+//but the difference in is key must be string, written with double quotes
 
-function name() {}
+// {"name":"John"}           this is JSON
 
-//Fucntion Expression
+//{name:"John"}             this is javascript Object
 
-var c = function () {
-  console.log("Function Expression");
-};
-c();
+//values must be one of the following data types
+// string
+// Number
+// Object
+// Array
+// Boolean
+// null
 
-// anonymous Function     //a function with out name and can pass as a value.
+// json values cannot be one of the following data types:
+//a function
+//a date
+//undefined
 
-// function ()
-// {
+const a = '{ "name": "john", "age": 30, "city": "New York" }';
+console.log(typeof a);
+console.log(a);
 
-// }
+//convert to javascript object
 
-//named function expression
+const obj = JSON.parse(a);
+console.log(typeof obj);
+console.log(obj);
 
-var a = function xyz() {
-  console.log("named function expression");
-};
+//second parameter in json.parse()
 
-a();
+const a1 =
+  '{ "name": "john", "age": 30, "city": "New York", "birth": "2023-02-02" }';
 
-//First Class Function   // The abality to pass a function inside a function  and can return a function
+const obj1 = JSON.parse(a1);
+obj1.birth = new Date(obj1.birth).toDateString();
+console.log("Birth", obj1.birth);
 
-function test(re) {
-  re();
+// convert object to json
+
+const arr = ["John", "Peter", "Sally", "Jane"];
+
+const myjson = JSON.stringify(arr);
+console.log("This is json sting:", myjson);
+
+//fetch from server
+async function dataget() {
+  const user = await fetch("https://jsonplaceholder.typicode.com/users")
+    .then((res) => {
+      return res.json();
+    })
+    .then((use) => {
+      return use;
+    });
+  console.log("user", user);
 }
 
-function resutl() {
-  console.log("Result");
-}
+sum2(3, 32, display2); 
 
-test(resutl);
 
-//Arrow Function
+dataget();
 
-var sum = () => 10 + 15;
 
-var result = sum();
-console.log(result);
-
-//CallBack Function  are passed as an argument to another functions
-//callBack Function can run after another function has finished.
-
-function display2(total) {
-  console.log("result:", total);
-}
-
-function sum2(num1, num2, display2) {
-  let total = num1 + num2;
-  display2(total);
-}
-
-sum2(3, 32, display2); //passing a function as argument
+//passing a function as argument
 
 // pass by value
 
@@ -99,3 +106,8 @@ console.log(`Value a and b before pass by reference: ${pobj.a} and ${pobj.b}`);
 passbyref(pobj);
 
 console.log(`Value a and b after pass by reference: ${pobj.a} and ${pobj.b}`);
+
+
+
+
+
