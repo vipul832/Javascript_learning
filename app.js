@@ -1,42 +1,27 @@
-//passing a function as argument
+console.log(Error); //return function of error
 
-// pass by value
+const a = new Error("This is error");
 
-function passbyvalue(a, b) {
-  //so in pass by value our actual value never change function creat new copy of argument then use in function
-  let temp;
-  temp = a;
-  a = b;
-  b = temp;
+//throw a; //ut will stop execution code untill this error solve
 
-  console.log(`value of a and b inside function ${a} ${b}`);
+console.log("here....");
+
+console.log(a.message);
+
+//
+function test(num) {
+  try {
+    if (num > 0) {
+      console.log("The number is positive");
+    }
+    if (num < 0) {
+      throw new Error("The number is negative Try again !!");
+    }
+  } catch (error) {
+    console.log(error.message);
+  } finally {
+    console.log("This will run even you have error or not.");
+  }
 }
 
-let a1 = 10;
-let b1 = 40;
-console.log(`Value of a and b before pass ${a1} ${b1}`);
-
-passbyvalue(a1, b1);
-
-console.log(`Value of a and b after pass ${a1} ${b1}`);
-
-// in pass by reference we use array and object
-
-function passbyref(obj) {
-  // as you se
-  obj.a = obj.a * 2;
-  obj.b = obj.b * 2;
-
-  console.log(`Value a and b inside pass by reference: ${obj.a} and ${obj.b}`);
-}
-
-let pobj = {
-  a: 12,
-  b: 0,
-};
-
-console.log(`Value a and b before pass by reference: ${pobj.a} and ${pobj.b}`);
-
-passbyref(pobj);
-
-console.log(`Value a and b after pass by reference: ${pobj.a} and ${pobj.b}`);
+test(10);
