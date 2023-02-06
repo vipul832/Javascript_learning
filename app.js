@@ -25,3 +25,55 @@ function test(num) {
 }
 
 test(10);
+
+//async error handling
+
+Promise.resolve("Async Fail")
+  .then((respon) => {
+    throw new Error("#1 Fail error");
+    return respon;
+  })
+  .then((response) => {
+    console.log("2", response);
+  });
+
+//promise inside promise
+
+Promise.resolve("Async Fail")
+  .then((respon) => {
+    Promise.resolve()
+      .then(() => {
+        throw new Error("#2 Fail error");
+      })
+      .catch(console.log());
+    return 5;
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log("final error", err);
+  });
+
+//using async and await
+
+(async function () {
+  try {
+    await Promise.resolve("NO error");
+    await Promise.reject("Error #1");
+  } catch (err) {
+    console.log(err);
+  }
+})();
+
+//Create custom Error
+
+class AuthError extends Error {
+  constructor(messsage) {
+    super(messsage);
+    this.name = "Authentication Error";
+    this.fruit = "grapes";
+  }
+}
+
+throw new AuthError("Wrong Password");
