@@ -1,79 +1,113 @@
-console.log(Error); //return function of error
 
-const a = new Error("This is error");
+// Promise method
 
-//throw a; //ut will stop execution code untill this error solve
+const promiseOne = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve("promiseOne Resolved !...");
+      reject("promiseOne Reject !...");
+    }, 500);
+  });
+const promiseTwo = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve("promiseTwo Resolved !...");
+      reject("promiseTwo Reject !...");
+    }, 600);
+  });
+const promiseThree = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("promiseThree Resolve !...");
+      // reject("promiseThree Reject !...");
+    }, 700);
+  });
 
-console.log("here....");
-
-console.log(a.message);
-
-//
-function test(num) {
+const fetchData = async () => {
   try {
-    if (num > 0) {
-      console.log("The number is positive");
-    }
-    if (num < 0) {
-      throw new Error("The number is negative Try again !!");
-    }
+    // let startTime = new Date();
+
+    // const responseOne = await promiseOne();
+    // const responseTwo = await promiseTwo();
+    // const responseThree = await promiseThree();
+
+    // let endTime = new Date();
+
+    // console.log(
+    //   "Promises:",
+    //   responseOne,
+    //   responseTwo,
+    //   responseThree,
+    //   endTime - startTime
+    // );
+
+    //#1  promise.all()   return  a single promise then it return an array with fulfillment values.It rejects when any of the
+    // input's promises rejects, with this first rejection reason.
+
+    // let startTime = new Date();
+
+    // const response = await Promise.all([
+    //   promiseOne(),
+    //   promiseTwo(),
+    //   promiseThree(),
+    // ]);
+
+    // let endTime = new Date();
+
+    // console.log("Repsonse from promise.all:", response, endTime - startTime);
+
+    //#2  promise.allsettled     //return array of object with status and value or reason for each promise
+
+    // let startTime = new Date();
+
+    // const response = await Promise.allSettled([
+    //   promiseOne(),
+    //   promiseTwo(),
+    //   promiseThree(),
+    // ]);
+
+    // let endTime = new Date();
+
+    // console.log("Repsonse from promise.all:", response, endTime - startTime);
+
+    // for (const status1 of response) {
+    //   if (status1.status === "rejected") {
+    //     console.log(status1.reason);
+    //   } else {
+    //     console.log(status1.value);
+    //   }
+    // }
+
+    //#3 promise.race()    //return a result of a promise whose take time less
+
+    // let startTime = new Date();
+
+    // const response = await Promise.race([
+    //   promiseOne(),
+    //   promiseTwo(),
+    //   promiseThree(),
+    // ]);
+
+    // let endTime = new Date();
+
+    // console.log("Repsonse from promise.all:", response, endTime - startTime);
+
+    //#4 promise.any()      //return first filled value in return promises
+
+    let startTime = new Date();
+
+    const response = await Promise.any([
+      promiseOne(),
+      promiseTwo(),
+      promiseThree(),
+    ]);
+
+    let endTime = new Date();
+
+    console.log("Repsonse from promise.all:", response, endTime - startTime);
   } catch (error) {
-    console.log(error.message);
-  } finally {
-    console.log("This will run even you have error or not.");
+    console.log("error:", error);
   }
-}
+};
 
-test(10);
-
-//async error handling
-
-Promise.resolve("Async Fail")
-  .then((respon) => {
-    throw new Error("#1 Fail error");
-    return respon;
-  })
-  .then((response) => {
-    console.log("2", response);
-  });
-
-//promise inside promise
-
-Promise.resolve("Async Fail")
-  .then((respon) => {
-    Promise.resolve()
-      .then(() => {
-        throw new Error("#2 Fail error");
-      })
-      .catch(console.log());
-    return 5;
-  })
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log("final error", err);
-  });
-
-//using async and await
-
-(async function () {
-  try {
-    await Promise.resolve("NO error");
-    await Promise.reject("Error #1");
-  } catch (err) {
-    console.log(err);
-  }
-})();
-
-//Create custom Error
-
-class AuthError extends Error {
-  constructor(messsage) {
-    super(messsage);
-    this.name = "Authentication Error";
-    this.fruit = "grapes";
-  }
-}
-
-throw new AuthError("Wrong Password");
+fetchData();
