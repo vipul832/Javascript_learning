@@ -1,42 +1,79 @@
-//passing a function as argument
+console.log(Error); //return function of error
 
-// pass by value
+const a = new Error("This is error");
 
-function passbyvalue(a, b) {
-  //so in pass by value our actual value never change function creat new copy of argument then use in function
-  let temp;
-  temp = a;
-  a = b;
-  b = temp;
+//throw a; //ut will stop execution code untill this error solve
 
-  console.log(`value of a and b inside function ${a} ${b}`);
+console.log("here....");
+
+console.log(a.message);
+
+//
+function test(num) {
+  try {
+    if (num > 0) {
+      console.log("The number is positive");
+    }
+    if (num < 0) {
+      throw new Error("The number is negative Try again !!");
+    }
+  } catch (error) {
+    console.log(error.message);
+  } finally {
+    console.log("This will run even you have error or not.");
+  }
 }
 
-let a1 = 10;
-let b1 = 40;
-console.log(`Value of a and b before pass ${a1} ${b1}`);
+test(10);
 
-passbyvalue(a1, b1);
+//async error handling
 
-console.log(`Value of a and b after pass ${a1} ${b1}`);
+Promise.resolve("Async Fail")
+  .then((respon) => {
+    throw new Error("#1 Fail error");
+    return respon;
+  })
+  .then((response) => {
+    console.log("2", response);
+  });
 
-// in pass by reference we use array and object
+//promise inside promise
 
-function passbyref(obj) {
-  // as you se
-  obj.a = obj.a * 2;
-  obj.b = obj.b * 2;
+Promise.resolve("Async Fail")
+  .then((respon) => {
+    Promise.resolve()
+      .then(() => {
+        throw new Error("#2 Fail error");
+      })
+      .catch(console.log());
+    return 5;
+  })
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((err) => {
+    console.log("final error", err);
+  });
 
-  console.log(`Value a and b inside pass by reference: ${obj.a} and ${obj.b}`);
+//using async and await
+
+(async function () {
+  try {
+    await Promise.resolve("NO error");
+    await Promise.reject("Error #1");
+  } catch (err) {
+    console.log(err);
+  }
+})();
+
+//Create custom Error
+
+class AuthError extends Error {
+  constructor(messsage) {
+    super(messsage);
+    this.name = "Authentication Error";
+    this.fruit = "grapes";
+  }
 }
 
-let pobj = {
-  a: 12,
-  b: 0,
-};
-
-console.log(`Value a and b before pass by reference: ${pobj.a} and ${pobj.b}`);
-
-passbyref(pobj);
-
-console.log(`Value a and b after pass by reference: ${pobj.a} and ${pobj.b}`);
+throw new AuthError("Wrong Password");
